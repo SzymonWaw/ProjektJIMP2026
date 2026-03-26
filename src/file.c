@@ -5,6 +5,7 @@
 
 Edge parse(FILE *file)
 {
+	fopen(file, "r");
 	Edge *edge = malloc(sizeof(Edge) * MAX_EDGES);
 	for(int i = 0; i < MAX_EDGES && !feof(file); i++)
 	{
@@ -16,4 +17,13 @@ Edge parse(FILE *file)
 	}
 	free(edge);
 	return *edge;
+}
+
+void f_out(Point *point, FILE *file)
+{
+	fopen(file, "w");
+	for(int i = 0; i < MAX_EDGES; i++)
+	{
+		fprintf(file, "%d, %lf, %lf", point[i].id, point[i].cords.x, point[i].cords.y);
+	}
 }

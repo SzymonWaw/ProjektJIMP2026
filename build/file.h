@@ -20,4 +20,6 @@ typedef struct{
 
 Edge parse(FILE *file);
 
+void f_out(Point *point, FILE *file);
+
 #endif

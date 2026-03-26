@@ -4,12 +4,15 @@
 
 int main(int argc, char **argv)
 {
-	FILE *file = fopen(argv[1], "r");
-	if (!file)
+	FILE *file = argv[1];
+	FILE *output = argv[2];
+	if(file == NULL || output == NULL)
 	{
-		perror("Usage: program <filename>");
-		return EXIT_FAILURE;
+		printf("Nie podano pliku wejsciowego lub wyjsciowego");
+		return 1;
 	}
+	
 	Edge edge = parse(file);
 	fclose(file);
+	fclose(output);
 }
