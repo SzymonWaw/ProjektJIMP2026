@@ -4,15 +4,23 @@
 
 int main(int argc, char **argv)
 {
-	FILE *file = argv[1];
-	FILE *output = argv[2];
+	FILE *file = fopen(argv[1], "r");
+	FILE *output = fopen(argv[2], "w");
+
 	if(file == NULL || output == NULL)
 	{
 		printf("Nie podano pliku wejsciowego lub wyjsciowego");
 		return 1;
 	}
 	
-	Edge edge = parse(file);
+	int edge_count;
+	Edge *edge = parse(file, &edge_count);
+
+
+
+	
 	fclose(file);
 	fclose(output);
+	free_edges(edge, edge_count);
+	return 0;
 }
