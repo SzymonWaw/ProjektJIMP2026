@@ -6,10 +6,10 @@ TARGET = graf.exe
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-    $(CC) -o $@ $^ $(CFLAGS)
+	$(CC) -o $@ $^ $(CFLAGS)
 
 %.o: %.c
-    $(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
     del $(OBJ) $(TARGET)
