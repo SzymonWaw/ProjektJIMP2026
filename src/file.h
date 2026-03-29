@@ -18,7 +18,7 @@ typedef struct{
 	Point *B;
 } Edge;
 
-Edge* parse(FILE *file);
+Edge *parse(FILE *file, int *out_count));
 
 void f_out(Point *points, FILE *file, int point_count, int is_binary);
 
