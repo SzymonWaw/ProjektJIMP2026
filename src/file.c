@@ -20,26 +20,55 @@ Edge *parse(FILE *file, int *out_count)
 	return edge;
 }
 
-void f_out(Point *point, FILE *file, int point_count)
-{
-	for(int i = 0; i < point_count; i++)
-	{
-		fprintf(file, "%d, %lf, %lf", point[i].id, point[i].cords.x, point[i].cords.y);
-	}
+void f_out(Point *points, FILE *file, int point_count, int is_binary) {
+    if (points == NULL || file == NULL) {
+        return;
+    }
+
+    if (is_binary) {
+        for (int i = 0; i < point_count; i++) {
+            fwrite(&points[i].id, sizeof(int), 1, file);
+            fwrite(&points[i].cords.x, sizeof(double), 1, file);
+            fwrite(&points[i].cords.y, sizeof(double), 1, file);
+        }
+    } else {
+        for (int i = 0; i < point_count; i++) {
+            fprintf(file, "%d %.1f %.1f\n", points[i].id, points[i].cords.x, points[i].cords.y);
+        }
+    }
 }
 
-void free_edges(Edge *edges, int edge_count)
-{
+Point* extract_unique_points(Edge *edges, int edge_count, int *out_unique_count) {
 
-	if (edges == NULL)
-		return;
+    Point *unique_points = malloc(sizeof(Point) * (edge_count * 2));
+    int count = 0;
 
-	for (int i = 0; i < edge_count; i++)
-	{
-		free(edges[i].name);
-		free(edges[i].A);
-		free(edges[i].B);
-	}
-	
-	free(edges);
+    for (int i = 0; i < edge_count; i++) {
+        int found_A = 0;
+        for (int j = 0; j < count; j++) {
+            if (unique_points[j].id == edges[i].A->id) {
+                found_A = 1; 
+                break;
+            }
+        }
+        if (!found_A) {
+            unique_points[count] = *(edges[i].A);
+            count++;
+        }
+
+        int found_B = 0;
+        for (int j = 0; j < count; j++) {
+            if (unique_points[j].id == edges[i].B->id) {
+                found_B = 1; 
+                break;
+            }
+        }
+        if (!found_B) {
+            unique_points[count] = *(edges[i].B);
+            count++;
+        }
+    }
+
+    *out_unique_count = count;
+    return unique_points;
 }
