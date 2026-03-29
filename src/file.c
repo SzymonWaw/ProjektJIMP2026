@@ -38,37 +38,16 @@ void f_out(Point *points, FILE *file, int point_count, int is_binary) {
     }
 }
 
-Point* extract_unique_points(Edge *edges, int edge_count, int *out_unique_count) {
 
-    Point *unique_points = malloc(sizeof(Point) * (edge_count * 2));
-    int count = 0;
+void free_edges(Edge *edges, int edge_count)
+{
+	if (edges == NULL) return;
 
-    for (int i = 0; i < edge_count; i++) {
-        int found_A = 0;
-        for (int j = 0; j < count; j++) {
-            if (unique_points[j].id == edges[i].A->id) {
-                found_A = 1; 
-                break;
-            }
-        }
-        if (!found_A) {
-            unique_points[count] = *(edges[i].A);
-            count++;
-        }
-
-        int found_B = 0;
-        for (int j = 0; j < count; j++) {
-            if (unique_points[j].id == edges[i].B->id) {
-                found_B = 1; 
-                break;
-            }
-        }
-        if (!found_B) {
-            unique_points[count] = *(edges[i].B);
-            count++;
-        }
-    }
-
-    *out_unique_count = count;
-    return unique_points;
+	for (int i = 0; i < edge_count; i++){
+		free(edges[i].name);
+		free(edges[i].A);
+		free(edges[i].B);
+	}
+	
+	free(edges);
 }
