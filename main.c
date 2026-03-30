@@ -4,12 +4,19 @@
 
 int main(int argc, char **argv)
 {
-	FILE *file = fopen(argv[1], "r");
-	FILE *output = fopen(argv[2], "w");
+	int binary = atoi(argv[1]);
+	FILE *file = fopen(argv[2], "r");
+	FILE *output = fopen(argv[3], "w");
 
-	if(argc != 3)
+	if(argc != 4)
 	{
 		printf("Nie podano odpowiedniej liczby argumentow");
+		return 1;
+	}
+
+	if(binary != 0 && binary != 1)
+	{
+		printf("Trzeci argument musi byc 0 lub 1");
 		return 1;
 	}
 

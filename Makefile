@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c11 -lm
-OBJ = src/main.o src/file.o
+OBJ = main.o file.o alg.o
 TARGET = graf.exe
 
 all: $(TARGET)
@@ -12,4 +12,4 @@ $(TARGET): $(OBJ)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
-    del $(OBJ) $(TARGET)
+	del $(OBJ) $(TARGET)
