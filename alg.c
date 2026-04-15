@@ -51,7 +51,7 @@ void tutte(Edge *edge, int e_count, bool *fixed)
 	}
 
 	int v1, v2, v3;
-	find_outer_edges(adj, degree, n, &v1, &v2, &v3);
+	find_edges(adj, degree, n, &v1, &v2, &v3);
 
 	double *x = calloc(n + 1, sizeof(double));
 	double *y = calloc(n + 1, sizeof(double));
