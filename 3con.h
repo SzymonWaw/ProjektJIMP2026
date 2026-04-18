@@ -9,4 +9,6 @@ int check_3connectivity(Edge *edges, int edge_count);
 
 void free_adjacency(int **adj, int *degree, int n);
 
+int is_planar(Edge *edges, int edge_count);
+
 #endif
