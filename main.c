@@ -27,7 +27,8 @@ int main(int argc, char **argv)
 	int edge_count;
 	Edge *edge = parse(file, &edge_count);
 	check_3connectivity(edge, edge_count);
-
+	tutte(edge, edge_count, NULL);
+	f_out(edge[0].A, output, edge_count * 2, binary);
 	fclose(file);
 	fclose(output);
 	free_edges(edge, edge_count);

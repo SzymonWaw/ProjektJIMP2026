@@ -20,27 +20,30 @@ Edge *parse(FILE *file, int *out_count)
 	return edge;
 }
 
-void f_out(Point *points, FILE *file, int point_count, int binary)
+void f_out(Edge *edge, FILE *file, int edge_count, int binary)
 {
-	if(points == NULL || file == NULL)
+	if(edge == NULL || file == NULL)
 	{
 		return;
 	}
 
 	if(binary)
 	{
-		for(int i = 0; i < point_count; i++)
+		for(int i = 0; i < edge_count; i++)
 		{
-			fwrite(&points[i].id, sizeof(int), 1, file);
-			fwrite(&points[i].cords.x, sizeof(double), 1, file);
-			fwrite(&points[i].cords.y, sizeof(double), 1, file);
+			fwrite(&edge[i].A->id, sizeof(int), 1, file);
+			fwrite(&edge[i].A->cords.x, sizeof(double), 1, file);
+			fwrite(&edge[i].A->cords.y, sizeof(double), 1, file);
+			fwrite(&edge[i].B->id, sizeof(int), 1, file);
+			fwrite(&edge[i].B->cords.x, sizeof(double), 1, file);
+			fwrite(&edge[i].B->cords.y, sizeof(double), 1, file);
 		}
 	}
 	else
 	{
-		for(int i = 0; i < point_count; i++)
+		for(int i = 0; i < edge_count; i++)
 		{
-			fprintf(file, "%d %.1f %.1f\n", points[i].id, points[i].cords.x, points[i].cords.y);
+			fprintf(file, "%s %d %d %.1f\n", edge[i].name, edge[i].A->id, edge[i].B->id, edge[i].weight);
 		}
 	}
 }

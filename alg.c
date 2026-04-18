@@ -96,11 +96,12 @@ void tutte(Edge *edge, int e_count, bool *fixed)
 				new_y[i] = sum_y / degree[i];
 			}
 		}
-		double *temp_x = x; x = new_x; new_x = temp_x;
-		double *temp_y = y; y = new_y; new_y = temp_y;
+		double *tmp_x = x; x = new_x; new_x = tmp_x;
+		double *tmp_y = y; y = new_y; new_y = tmp_y;
 	}
 
-	for(int i = 0; i < e_count; i++){
+	for(int i = 0; i < e_count; i++)
+	{
 		edge[i].A->cords.x = x[edge[i].A->id];
 		edge[i].A->cords.y = y[edge[i].A->id];
 		edge[i].B->cords.x = x[edge[i].B->id];

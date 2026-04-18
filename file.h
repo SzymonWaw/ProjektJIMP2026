@@ -20,7 +20,7 @@ typedef struct{
 
 Edge *parse(FILE *file, int *out_count);
 
-void f_out(Point *points, FILE *file, int point_count, int binary);
+void f_out(Edge *edge, FILE *file, int edge_count, int binary);
 
 void free_edges(Edge *edges, int edge_count);
 
