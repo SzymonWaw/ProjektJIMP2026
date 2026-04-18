@@ -49,7 +49,7 @@ void f_out(Edge *edge, FILE *file, int edge_count, int binary)
 	{
 		if(!visited[edge[i].A->id])
 		{
-			if(binary = 0)
+			if(binary == 0)
 			{
 				fwrite(&edge[i].A->id, sizeof(int), 1, file);
 				fwrite(&edge[i].A->cords.x, sizeof(double), 1, file);
@@ -64,7 +64,7 @@ void f_out(Edge *edge, FILE *file, int edge_count, int binary)
 
 		if(!visited[edge[i].B->id])
 		{
-			if(binary = 0)
+			if(binary == 0)
 			{
 				fwrite(&edge[i].B->id, sizeof(int), 1, file);
 				fwrite(&edge[i].B->cords.x, sizeof(double), 1, file);
