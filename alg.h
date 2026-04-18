@@ -1,5 +1,6 @@
 #ifndef ALG_H
 #define ALG_H
+#include <stdbool.h> 
 #include "file.h"
 
 void tutte(Edge *edge, int e_count, bool *fixed);
