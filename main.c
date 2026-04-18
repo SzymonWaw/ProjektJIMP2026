@@ -30,7 +30,23 @@ int main(int argc, char **argv)
 	
 	int edge_count;
 	Edge *edge = parse(file, &edge_count);
-	check_3connectivity(edge, edge_count);
+	
+	if(!is_planar(edge, edge_count))
+	{
+	    free_edges(edge, edge_count);
+	    fclose(file);
+	    fclose(output);
+	    return 1;
+	}
+	
+	if(!check_3connectivity(edge, edge_count))
+	{
+	    free_edges(edge, edge_count);
+	    fclose(file);
+	    fclose(output);
+	    return 1;
+	}
+	
 	tutte(edge, edge_count, NULL);
 	f_out(edge, output, edge_count, binary);
 	fclose(file);
