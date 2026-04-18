@@ -13,7 +13,7 @@ Edge *parse(FILE *file, int *out_count)
 		edge[i].name = malloc(sizeof(char) * 2);
 		edge[i].A = malloc(sizeof(Point));
 		edge[i].B = malloc(sizeof(Point));
-		fscanf(file, "%s %d %d %lf", edge[i].name, &edge[i].A->id, &edge[i].B->id,&edge[i].weight);
+		fscanf(file, "%s %d %d %lf", edge[i].name, &edge[i].A->id, &edge[i].B->id, &edge[i].weight);
 		count++;
 	}
 	*out_count = count;

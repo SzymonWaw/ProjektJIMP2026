@@ -137,12 +137,12 @@ int check_3connectivity(Edge *edges, int edge_count) {
         if (disc[i] == 0) { connected = 0; break; }
 
     if (!connected) {
-        printf("Graf NIE jest spójny (nie jest nawet 1-spójny).\n");
+        printf("Graf NIE jest spojny.\n");
         free(disc); free(low); free(parent); free(is_ap);
         free_adjacency(adj, degree, n);
         return 0;
     }
-    printf("Graf jest 1-spójny.\n");
+    printf("Graf jest 1-spojny.\n");
 
     int has_ap = 0;
     for (int i = 1; i <= n; i++)
@@ -151,23 +151,23 @@ int check_3connectivity(Edge *edges, int edge_count) {
     free(disc); free(low); free(parent); free(is_ap);
 
     if (has_ap) {
-        printf("Graf NIE jest 2-spójny (ma punkty artykulacji).\n");
+        printf("Graf NIE jest 2-spojny (ma punkty artykulacji).\n");
         free_adjacency(adj, degree, n);
         return 0;
     }
-    printf("Graf jest 2-spójny.\n");
+    printf("Graf jest 2-spojny.\n");
 
     for (int u = 1; u <= n; u++) {
         for (int v = u + 1; v <= n; v++) {
             if (!is_connected_without(adj, degree, n, u, v)) {
-                printf("Graf NIE jest 3-spójny "  "(usunięcie wierzchołków %d i %d rozspójnia graf).\n", u, v);
+                printf("Graf nie jest 3-spójny "  "(usuniecie wierzcholkow %d i %d rozspojnia graf).\n", u, v);
                 free_adjacency(adj, degree, n);
                 return 0;
             }
         }
     }
 
-    printf("Graf JEST 3-spójny.\n");
+    printf("Graf JEST 3-spojny.\n");
     free_adjacency(adj, degree, n);
     return 1;
 }
