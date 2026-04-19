@@ -5,7 +5,6 @@
 #include "file.h"
 #include "3con.h"
 #include "alg.h"
-
 #define ITERATIONS 1000
 
 void find_edges(int **adj, int *degree, int n, int *v1, int *v2, int *v3)
@@ -22,7 +21,11 @@ void find_edges(int **adj, int *degree, int n, int *v1, int *v2, int *v3)
 			for(int j = 0; j < degree[v]; j++)
 			{
 				int w = adj[v][j];
-				if (w == u) continue;
+				if (w == u)
+				{
+					continue;
+				}
+
 				for(int k = 0; k < degree[u]; k++)
 				{
 					if(adj[u][k] == w)
@@ -38,11 +41,12 @@ void find_edges(int **adj, int *degree, int n, int *v1, int *v2, int *v3)
 	}
 }
 
-void tutte(Edge *edge, int e_count, bool *fixed)
+void tutte(Edge *edge, int e_count)
 {
 	int n;
 	int *degree;
 	int **adj = build_adjacency(edge, e_count, &n, &degree);
+	bool *fixed = calloc(n + 1, sizeof(bool));
 
 	if(n < 3)
 	{

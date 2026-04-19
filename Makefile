@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c11
 LDFLAGS = -lm
 
-OBJ = main.o file.o alg.o 3con.o
+OBJ = main.o file.o alg.o 3con.o euler.o
 TARGET = graf.exe
 
 all: $(TARGET)
@@ -14,4 +14,4 @@ $(TARGET): $(OBJ)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 clean:
-	rm -f $(OBJ) $(TARGET)
+	del $(OBJ) $(TARGET)
