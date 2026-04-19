@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c11
 LDFLAGS = -lm
 
-OBJ = main.o file.o alg.o 3con.o euler.o
+OBJ = main.o file.o alg.o 3con.o valid.o
 TARGET = graf.exe
 
 all: $(TARGET)

@@ -3,7 +3,7 @@
 #include "file.h"
 #include "3con.h"
 #include "alg.h"
-#include "euler.h"
+#include "valid.h"
 
 int main(int argc, char **argv)
 {
@@ -38,22 +38,22 @@ int main(int argc, char **argv)
 	int edge_count;
 	Edge *edge = parse(file, &edge_count);
 	
-	if(!planar(edge, edge_count))
+	if(planar(edge, edge_count) == 1)
 	{
-	    free_edges(edge, edge_count);
-	    fclose(file);
-	    fclose(output);
-		printf("Graf nie spełnia warunków planarności");
-	    return 1;
+		free_edges(edge, edge_count);
+		fclose(file);
+		fclose(output);
+		printf("Graf nie spelnia warunkow planarnosci");
+		return 1;
 	}
 	
-	if(!check_3connectivity(edge, edge_count))
+	if(connectivity(edge, edge_count) == 1)
 	{
-	    free_edges(edge, edge_count);
-	    fclose(file);
-	    fclose(output);
-		printf("Graf nie jest 3-spójny");
-	    return 1;
+		free_edges(edge, edge_count);
+		fclose(file);
+		fclose(output);
+		printf("Graf nie jest 3-spojny");
+		return 1;
 	}
 	
 	tutte(edge, edge_count);

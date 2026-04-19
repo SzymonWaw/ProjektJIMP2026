@@ -39,42 +39,53 @@ void f_out(Edge *edge, FILE *file, int edge_count, int binary)
 	int max_id = 0;
 	for(int i = 0; i < edge_count; i++)
 	{
-		if(edge[i].A->id > max_id) max_id = edge[i].A->id;
-		if(edge[i].B->id > max_id) max_id = edge[i].B->id;
+		if(edge[i].A->id > max_id)
+		{
+			max_id = edge[i].A->id;
+		}
+		if(edge[i].B->id > max_id)
+		{
+			max_id = edge[i].B->id;
+		}
 	}
 
 	int *visited = calloc(max_id + 1, sizeof(int));
 
-	for(int i = 0; i < edge_count; i++)
+	if(binary == 0)
 	{
-		if(!visited[edge[i].A->id])
+		for(int i = 0; i < edge_count; i++)
 		{
-			if(binary == 0)
+			if(visited[edge[i].A->id] == 0)
+			{
+				fprintf(file, "%d %f %f\n", edge[i].A->id, edge[i].A->cords.x, edge[i].A->cords.y);
+				visited[edge[i].A->id] = 1;
+			}
+			if(visited[edge[i].B->id] == 0)
+			{
+				fprintf(file, "%d %f %f\n", edge[i].B->id, edge[i].B->cords.x, edge[i].B->cords.y);
+				visited[edge[i].B->id] = 1;
+			}
+		}
+	}
+
+	if(binary == 1)
+	{
+		for(int i = 0; i < edge_count; i++)
+		{
+			if(visited[edge[i].A->id] == 0)
 			{
 				fwrite(&edge[i].A->id, sizeof(int), 1, file);
 				fwrite(&edge[i].A->cords.x, sizeof(double), 1, file);
 				fwrite(&edge[i].A->cords.y, sizeof(double), 1, file);
+				visited[edge[i].A->id] = 1;
 			}
-			else
-			{
-				fprintf(file, "%d %f %f\n", edge[i].A->id, edge[i].A->cords.x, edge[i].A->cords.y);
-			}
-			visited[edge[i].A->id] = 1;
-		}
-
-		if(!visited[edge[i].B->id])
-		{
-			if(binary == 0)
+			if(visited[edge[i].B->id] == 0)
 			{
 				fwrite(&edge[i].B->id, sizeof(int), 1, file);
 				fwrite(&edge[i].B->cords.x, sizeof(double), 1, file);
 				fwrite(&edge[i].B->cords.y, sizeof(double), 1, file);
+				visited[edge[i].B->id] = 1;
 			}
-			else
-			{
-				fprintf(file, "%d %f %f\n", edge[i].B->id, edge[i].B->cords.x, edge[i].B->cords.y);
-			}
-			visited[edge[i].B->id] = 1;
 		}
 	}
 	free(visited);

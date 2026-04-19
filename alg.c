@@ -7,7 +7,7 @@
 #include "alg.h"
 #define ITERATIONS 1000
 
-void find_edges(int **adj, int *degree, int n, int *v1, int *v2, int *v3)
+void triangle(int **adj, int *degree, int n, int *v1, int *v2, int *v3)
 {
 	*v1 = 1;
 	*v2 = 2;
@@ -55,7 +55,7 @@ void tutte(Edge *edge, int e_count)
 	}
 
 	int v1, v2, v3;
-	find_edges(adj, degree, n, &v1, &v2, &v3);
+	triangle(adj, degree, n, &v1, &v2, &v3);
 
 	double *x = calloc(n + 1, sizeof(double));
 	double *y = calloc(n + 1, sizeof(double));
