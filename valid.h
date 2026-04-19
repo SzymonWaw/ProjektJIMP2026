@@ -2,8 +2,8 @@
 #define VALID_H
 #include "file.h"
 
-int planar(Edge *edges, int edge_count);
+int euler(Edge *edges, int edge_count);
 
-static void dfs_ap(int u, int **adj, int *degree, int n);
+int dfs(int n, int **adj, int *degree);
 
 #endif

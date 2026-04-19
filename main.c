@@ -38,12 +38,12 @@ int main(int argc, char **argv)
 	int edge_count;
 	Edge *edge = parse(file, &edge_count);
 	
-	if(planar(edge, edge_count) == 1)
+	if(euler(edge, edge_count) == 1)
 	{
 		free_edges(edge, edge_count);
 		fclose(file);
 		fclose(output);
-		printf("Graf nie spelnia warunkow planarnosci");
+		printf("Graf nie spelnia rownania Eulera");
 		return 1;
 	}
 	
@@ -58,7 +58,7 @@ int main(int argc, char **argv)
 	
 	tutte(edge, edge_count);
 	f_out(edge, output, edge_count, binary);
-	
+
 	fclose(file);
 	fclose(output);
 	free_edges(edge, edge_count);

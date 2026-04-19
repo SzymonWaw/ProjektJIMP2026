@@ -21,7 +21,7 @@ void triangle(int **adj, int *degree, int n, int *v1, int *v2, int *v3)
 			for(int j = 0; j < degree[v]; j++)
 			{
 				int w = adj[v][j];
-				if (w == u)
+				if(w == u)
 				{
 					continue;
 				}
@@ -116,5 +116,6 @@ void tutte(Edge *edge, int e_count)
 	free(y);
 	free(new_x);
 	free(new_y);
+	free(fixed);
 	free_adjacency(adj, degree, n);
 }
