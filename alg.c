@@ -46,7 +46,6 @@ void tutte(Edge *edge, int e_count)
 	int n;
 	int *degree;
 	int **adj = build_adjacency(edge, e_count, &n, &degree);
-	bool *fixed = calloc(n + 1, sizeof(bool));
 
 	if(n < 3)
 	{
@@ -65,13 +64,6 @@ void tutte(Edge *edge, int e_count)
 	x[v1] = 0.0;	y[v1] = 0.0;
 	x[v2] = 1.0;	y[v2] = 0.0;
 	x[v3] = 0.5;	y[v3] = sqrt(3.0) / 2.0;
-
-	if(fixed != NULL)
-	{
-		fixed[v1] = true;
-		fixed[v2] = true;
-		fixed[v3] = true;
-	}
 
 	for(int iter = 0; iter < ITERATIONS; iter++)
 	{
@@ -116,6 +108,5 @@ void tutte(Edge *edge, int e_count)
 	free(y);
 	free(new_x);
 	free(new_y);
-	free(fixed);
 	free_adjacency(adj, degree, n);
 }
