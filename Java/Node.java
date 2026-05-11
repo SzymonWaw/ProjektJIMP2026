@@ -1,11 +1,5 @@
 import java.util.Arraylist;
 import java.util.List;
-import java.util.Hashmap;
-
-public class Graph{
-    public List<Node> nodes = new Hashmap<>();
-    public String error = ""
-}
 
 class Node{
     public int id;

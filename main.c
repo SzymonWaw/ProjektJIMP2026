@@ -4,6 +4,7 @@
 #include "3con.h"
 #include "alg.h"
 #include "valid.h"
+#include "javafile.h"
 
 int main(int argc, char **argv)
 {
@@ -58,6 +59,7 @@ int main(int argc, char **argv)
 	
 	tutte(edge, edge_count);
 	f_out(edge, output, edge_count, binary);
+	write_edges(edge, edge_count);
 
 	fclose(file);
 	fclose(output);
