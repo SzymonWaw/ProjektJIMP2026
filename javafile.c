@@ -9,7 +9,7 @@ void write_edges(Edge *edges, int edge_count)
 		return;
 	}
 
-	FILE *file = fopen("krawedzie.txt", "w");
+	FILE *file = fopen("edge.txt", "w");
 	if(file == NULL)
 	{
 		printf("Nie mozna utworzyc pliku krawedzie.txt\n");
