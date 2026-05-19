@@ -1,7 +1,7 @@
-import java.util.Hashmap;
+import java.util.HashMap;
 import java.util.Map;
 
-public class Graph{
-    public List<Node> nodes = new Hashmap<>();
-    public String error = ""
+public class Graph {
+    public Map<Integer, Node> nodes = new HashMap<>();
+    public String error = "";
 }

@@ -1,16 +1,15 @@
-import java.util.Arraylist;
+import java.util.ArrayList;
 import java.util.List;
 
-class Node{
-    public int id;
+class Node {
     public int id;
     public double x, y;
     public List<Integer> conn;
 
-    public Node(int id, double x, double y){
+    public Node(int id, double x, double y) {
         this.id = id;
         this.x = x;
         this.y = y;
-        this.conn.add(id) = new ArrayList<>();
+        this.conn = new ArrayList<>();
     }
 }

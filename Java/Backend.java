@@ -3,10 +3,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Locale;
-import java.io.Bufferedreader;
+import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-public class Backend{
+public class Backend {
     public Graph importGraph(String filename) {
         Graph graph = new Graph();
         String fileNode = "wynik.txt";
@@ -24,61 +24,65 @@ public class Backend{
     }
 
     private boolean runC(String fileNode, String fileEdge, Graph graph) {
-        try{
-            Processbuilder builder = new Processbuilder("ProjektJIMP2026/graf.exe", "0", fileNode, fileEdge);
+        try {
+            ProcessBuilder builder = new ProcessBuilder("ProjektJIMP2026/graf.exe", "0", fileNode, fileEdge);
             Process process = builder.start();
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            Stringbuilder output = new Stringbuilder();
+            StringBuilder output = new StringBuilder();
             String line;
-            while((line = reader.readline()) != null){
+
+            while((line = reader.readLine()) != null) {
                 output.append(line).append("\n");
             }
-            int ExitC = process.waitfor();
-            if(ExitC != 0){
+
+            int ExitC = process.waitFor();
+            if(ExitC != 0) {
                 graph.error = output.toString().trim();
                 return false;
             }
+
+            return true;
         }
         catch (IOException | InterruptedException e) {
-            graph.errorMessage = "Blad komunikacji z C: " + e.getMessage();
+            graph.error = "Blad komunikacji z C: " + e.getMessage();
             return false;
         }
     }
-}
+
     private void readNodes(String nodes_path, Graph graph)
     {
         File file = new File(nodes_path);
-        try (Scanner scanner = new Scanner(file)
-        {
-            Scanner.useLocale(Locale.US);
+        try (Scanner scanner = new Scanner(file)) {
+            scanner.useLocale(Locale.US);
 
-            while(Scanner.hasNext())
+            while(scanner.hasNext())
             {
                 int id = scanner.nextInt();
                 double x = scanner.nextDouble();
                 double y = scanner.nextDouble();
-                node.nodes.put(new Node(id, x, y));
+                graph.nodes.put(id, new Node(id, x, y));
             }
         }
         catch(Exception error){
-            graph.error("Nie udalo sie wczytac wierzcholkow");
+            graph.error = "Nie udalo sie wczytac wierzcholkow";
         }
     }
     private void readEdges(String edges_path, Graph graph)
     {
         File file = new File(edges_path);
-        try BufferedReader br = new BufferedReader(new FileReader(file));
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
-            while ((line = br.read.line()) != null){
-            String[] parts = line.trim().split(" \\s+");
-            int Aid = Integer.parseInt(parts[0]);
-            int Bid = Integer.parseInt(parts[1]);
-            graph.nodes.get(Aid).connected.add(Bid);
-            graph.nodes.get.(Bid).connected.add(Aid);
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.trim().split(" \\s+");
+                int Aid = Integer.parseInt(parts[0]);
+                int Bid = Integer.parseInt(parts[1]);
+                graph.nodes.get(Aid).conn.add(Bid);
+                graph.nodes.get(Bid).conn.add(Aid);
             }
+        }
         catch (Exception error){
-            graph.error = "Nie udalo sie wczytac krawedzi"
+            graph.error = "Nie udalo sie wczytac krawedzi";
         }
     }
 
